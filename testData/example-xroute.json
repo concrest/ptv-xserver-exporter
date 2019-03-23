@@ -1,0 +1,74 @@
+{
+ "serviceName":"PTV xRoute Server",
+ "minPoolSize":2,
+ "maxPoolSize":2,
+ "numSuccess":60837193,
+ "numFailure":919726,
+ "numRejected":871,
+ "numService":0,
+ "avgInnerTime":46,
+ "minInnerTime":-17,
+ "maxInnerTime":14687,
+ "avgComputationTime":38,
+ "avgOuterTime":48,
+ "minOuterTime":0,
+ "maxOuterTime":45290,
+ "processName":"19276@MYMAPSVR",
+ "committedVirtualMemorySize":921890816,
+ "processCpuTime":25933437500000,
+ "heapCommittedMemorySize":534773760,
+ "heapUsedMemorySize":87516864,
+ "nonHeapCommittedMemorySize":153223168,
+ "nonHeapUsedMemorySize":149420152,
+ "timeQuantiles": [
+  { "q":0.5, "outerTime":34, "innerTime":28 },
+  { "q":0.75, "outerTime":61, "innerTime":45 },
+  { "q":0.9, "outerTime":98, "innerTime":81 },
+  { "q":0.95, "outerTime":131, "innerTime":108 },
+  { "q":0.98, "outerTime":174, "innerTime":144 }
+ ],
+ "instances":[
+  {
+   "instanceSuffix":"m0001",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":6339549785,
+   "inUse":false,
+   "useCounter":31916097,
+   "moduleStatus":"RUNNING",
+   "processName":"20384@MYMAPSVR",
+   "committedVirtualMemorySize":267964416,
+   "processCpuTime":1166721531250000,
+   "heapCommittedMemorySize":38797312,
+   "heapUsedMemorySize":7108704,
+   "nonHeapCommittedMemorySize":25231360,
+   "nonHeapUsedMemorySize":24022408
+  }
+, 
+  {
+   "instanceSuffix":"m0002",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":6339549746,
+   "inUse":false,
+   "useCounter":29840805,
+   "moduleStatus":"RUNNING",
+   "processName":"20400@MYMAPSVR",
+   "committedVirtualMemorySize":274341888,
+   "processCpuTime":1204210187500000,
+   "heapCommittedMemorySize":37224448,
+   "heapUsedMemorySize":4723512,
+   "nonHeapCommittedMemorySize":25624576,
+   "nonHeapUsedMemorySize":24041936
+  }
+  
+ ],
+ "backendTimeout":300000,
+ "startupTimeout":300000,
+ "jobBackendTimeout":-1,
+ "requests":[
+ ],
+ "watches":[
+ ]
+
+}
