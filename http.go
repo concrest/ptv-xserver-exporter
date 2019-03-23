@@ -24,6 +24,8 @@ func NewService(env *Environment) *Service {
 	}
 
 	// TODO: Add any custom endpoints to ```service.Mux.Handle("/mypath", myHandlerFunc)
+	// Temporary:
+	service.Mux.Handle("/proxy", GetProxyHandler(env.MetricsAPIURL))
 
 	service.HTTPServer = &http.Server{
 		Addr: ":" + env.Port,
