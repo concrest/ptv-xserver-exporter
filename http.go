@@ -34,7 +34,7 @@ func NewService(env *Environment) *Service {
 		IdleTimeout:  time.Second * 60,
 	}
 
-	if env.LogLevel == "Debug" {
+	if env.HTTPLoggingEnabled {
 		httpLogger := &HTTPLogWriter{}
 
 		service.HTTPServer.Handler = handlers.LoggingHandler(httpLogger, service.Mux)
@@ -50,7 +50,7 @@ func createMux(env *Environment) *http.ServeMux {
 
 	// TODO: Figure out how to record http_request metrics
 	mux.Handle("/metrics", promhttp.Handler())
-	mux.HandleFunc("/health", getCurrentHealth)
+	mux.Handle("/health", getHealthHandler())
 
 	if env.IncDebugHandlers {
 		// https://www.robustperception.io/analysing-prometheus-memory-usage/
@@ -66,12 +66,4 @@ func createMux(env *Environment) *http.ServeMux {
 	}
 
 	return mux
-}
-
-func getCurrentHealth(response http.ResponseWriter, request *http.Request) {
-
-	// TODO. Define here what bad health looks like
-	response.Header().Set("Content-Type", "text/plain")
-	response.WriteHeader(200)
-	response.Write([]byte("OK"))
 }

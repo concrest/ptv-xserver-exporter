@@ -15,7 +15,7 @@ type HTTPAPICaller struct {
 
 // GetBytes gets the bytes from a HTTP API endpoint
 func (h *HTTPAPICaller) GetBytes(api string) ([]byte, error) {
-	defer timeTrack(time.Now(), "HTTPAPICaller.GetBytes")
+	defer timeTrack(time.Now(), "HTTP API Call")
 
 	log.WithFields(log.Fields{
 		"api": api,

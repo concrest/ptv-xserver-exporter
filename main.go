@@ -20,11 +20,14 @@ var (
 
 func main() {
 
-	env := NewEnvironment(&VersionInfo{
+	version := &VersionInfo{
 		version,
 		buildDate,
 		commitHash,
-	})
+	}
+	registerBuildInfo(version)
+
+	env := NewEnvironment(version)
 	InitialiseLogger(env.LogLevel)
 
 	env.LogVariables()
