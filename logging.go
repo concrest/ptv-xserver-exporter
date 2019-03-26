@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"time"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -32,6 +33,16 @@ func getLogLevel(level string) log.Level {
 	}
 
 	return log.ErrorLevel
+}
+
+// timeTrack tracks a function's duration if used with `defer`
+func timeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+
+	log.WithFields(log.Fields{
+		"name":          name,
+		"elapsedMillis": elapsed.Nanoseconds() / int64(time.Millisecond),
+	}).Debug("Time Track")
 }
 
 // HTTPLogWriter provides the Writer interface to a logrus logger

@@ -9,9 +9,6 @@ import (
 func GetProxyHandler(api string) http.Handler {
 	return &proxyHandler{
 		scraper: NewScraper(api, &HTTPAPICaller{}),
-		//scraper: NewScraper(api, &FileAPICaller{
-		//	Filename: "testData/example-xmapmatch.json",
-		//}),
 	}
 }
 

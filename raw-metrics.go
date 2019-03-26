@@ -1,6 +1,11 @@
 package main
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+
+	log "github.com/sirupsen/logrus"
+)
 
 // InstanceMetrics models 1 of RawMetrics Instances collection
 type InstanceMetrics struct {
@@ -52,6 +57,11 @@ func NewRawMetrics(bytes []byte) (*RawMetrics, error) {
 
 	err := json.Unmarshal(bytes, &metrics)
 	if err != nil {
+		log.WithFields(log.Fields{
+			"bytes": fmt.Sprintf("%s", bytes),
+			"err":   err,
+		}).Warn("Error parsing RawMetrics bytes")
+
 		return &RawMetrics{}, err
 	}
 
