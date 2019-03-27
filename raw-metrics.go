@@ -28,7 +28,7 @@ type InstanceMetrics struct {
 // RawMetrics models the result of the metrics request to the PTV server
 type RawMetrics struct {
 	ServiceName                string
-	MinPoolSize                int
+	MinPoolSize                float64 // TODO: Make all numbers compatible with Prometheus types
 	MaxPoolSize                int
 	NumSuccess                 uint64
 	NumFailure                 uint64

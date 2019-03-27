@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gorilla/handlers"
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
@@ -18,12 +19,12 @@ type Service struct {
 
 // NewService creates a new Service with the defined environment settings
 func NewService(env *Environment) *Service {
+	prometheus.MustRegister(NewPTVMetricsCollector(NewScraper(env.MetricsAPIURL, &HTTPAPICaller{})))
+
 	service := &Service{
 		Mux: createMux(env),
-		//TODO: If needed, add other dependencies here - using env if needed,
 	}
 
-	// Temporary:
 	service.Mux.Handle("/proxy", GetProxyHandler(env.MetricsAPIURL))
 
 	service.HTTPServer = &http.Server{
