@@ -3,27 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 
 	log "github.com/sirupsen/logrus"
 )
-
-// InstanceMetrics models 1 of RawMetrics Instances collection
-type InstanceMetrics struct {
-	InstanceSuffix             string
-	RestartCounter             float64
-	UserRestartCounter         float64
-	Uptime                     float64
-	InUse                      bool
-	UseCounter                 float64
-	ModuleStatus               string
-	ProcessName                string
-	CommittedVirtualMemorySize float64
-	ProcessCPUTime             float64
-	HeapCommittedMemorySize    float64
-	HeapUsedMemorySize         float64
-	NonHeapCommittedMemorySize float64
-	NonHeapUsedMemorySize      float64
-}
 
 // RawMetrics models the result of the metrics request to the PTV server
 type RawMetrics struct {
@@ -48,7 +31,33 @@ type RawMetrics struct {
 	HeapUsedMemorySize         float64
 	NonHeapCommittedMemorySize float64
 	NonHeapUsedMemorySize      float64
+	TimeQuantiles              []Quantile
 	Instances                  []InstanceMetrics
+}
+
+// Quantile models 1 of RawMetrics Quantiles collection
+type Quantile struct {
+	Q         float64
+	OuterTime float64
+	InnerTime float64
+}
+
+// InstanceMetrics models 1 of RawMetrics Instances collection
+type InstanceMetrics struct {
+	InstanceSuffix             string
+	RestartCounter             float64
+	UserRestartCounter         float64
+	Uptime                     float64
+	InUse                      bool
+	UseCounter                 float64
+	ModuleStatus               string
+	ProcessName                string
+	CommittedVirtualMemorySize float64
+	ProcessCPUTime             float64
+	HeapCommittedMemorySize    float64
+	HeapUsedMemorySize         float64
+	NonHeapCommittedMemorySize float64
+	NonHeapUsedMemorySize      float64
 }
 
 // NewRawMetrics creates a RawMetrics struct from some JSON bytes
@@ -66,4 +75,15 @@ func NewRawMetrics(bytes []byte) (*RawMetrics, error) {
 	}
 
 	return &metrics, nil
+}
+
+// GetQuantile gets the quantile closest to `q`
+func (r *RawMetrics) GetQuantile(q float64) Quantile {
+	for _, quantile := range r.TimeQuantiles {
+		if math.Abs(quantile.Q-q) < float64(0.0001) {
+			return quantile
+		}
+	}
+
+	return Quantile{}
 }

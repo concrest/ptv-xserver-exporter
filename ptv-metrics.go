@@ -6,37 +6,84 @@ import (
 
 // PTVMetrics models all the exported PTV metrics
 type PTVMetrics struct {
-	PTVUp                      *PTVMetric
-	PTVInfo                    *PTVMetric
-	MinPoolSize                *PTVMetric
-	MaxPoolSize                *PTVMetric
-	NumSuccess                 *PTVMetric
-	NumFailure                 *PTVMetric
-	NumRejected                *PTVMetric
-	NumService                 *PTVMetric
-	CommittedVirtualMemorySize *PTVMetric
-	HeapCommittedMemorySize    *PTVMetric
-	HeapUsedMemorySize         *PTVMetric
-	NonHeapCommittedMemorySize *PTVMetric
-	NonHeapUsedMemorySize      *PTVMetric
+	PTVUp       *PTVMetric
+	PTVInfo     *PTVMetric
+	MinPoolSize *PTVMetric
+	MaxPoolSize *PTVMetric
+
+	NumSuccess  *PTVMetric
+	NumFailure  *PTVMetric
+	NumRejected *PTVMetric
+	NumService  *PTVMetric
+
+	CommittedVirtualMemoryBytes *PTVMetric
+	HeapCommittedMemoryBytes    *PTVMetric
+	HeapUsedMemoryBytes         *PTVMetric
+	NonHeapCommittedMemoryBytes *PTVMetric
+	NonHeapUsedMemoryBytes      *PTVMetric
+
+	ProcessCPUTimeSeconds *PTVMetric
+
+	AvgInnerTimeSeconds       *PTVMetric
+	MinInnerTimeSeconds       *PTVMetric
+	MaxInnerTimeSeconds       *PTVMetric
+	AvgComputationTimeSeconds *PTVMetric
+	AvgOuterTimeSeconds       *PTVMetric
+	MinOuterTimeSeconds       *PTVMetric
+	MaxOuterTimeSeconds       *PTVMetric
+
+	TimeQuantile50InnerSeconds *PTVMetric
+	TimeQuantile50OuterSeconds *PTVMetric
+	TimeQuantile75InnerSeconds *PTVMetric
+	TimeQuantile75OuterSeconds *PTVMetric
+	TimeQuantile90InnerSeconds *PTVMetric
+	TimeQuantile90OuterSeconds *PTVMetric
+	TimeQuantile95InnerSeconds *PTVMetric
+	TimeQuantile95OuterSeconds *PTVMetric
+	TimeQuantile98InnerSeconds *PTVMetric
+	TimeQuantile98OuterSeconds *PTVMetric
 }
 
 // NewPtvMetrics creates the container of metrics to export
 func NewPtvMetrics() *PTVMetrics {
 	return &PTVMetrics{
-		PTVUp:                      NewPtvMetric("up", "1 if the last metrics scrape was successful"),
-		PTVInfo:                    NewPtvMetric("info", "A gauge with constant value 1 showing PTV info in labels", "service_name", "process_name"),
-		MinPoolSize:                NewPtvMetric("min_pool_size", "Value of minPoolSize"),
-		MaxPoolSize:                NewPtvMetric("max_pool_size", "Value of maxPoolSize"),
-		NumSuccess:                 NewPtvMetric("num_success", "Value of numSuccess"),
-		NumFailure:                 NewPtvMetric("num_failure", "Value of numFailure"),
-		NumRejected:                NewPtvMetric("num_rejected", "Value of numRejected"),
-		NumService:                 NewPtvMetric("num_service", "Value of numService"),
-		CommittedVirtualMemorySize: NewPtvMetric("committed_virtual_memory_bytes", "Value of committedVirtualMemorySize"),
-		HeapCommittedMemorySize:    NewPtvMetric("heap_committed_memory_bytes", "Value of heapCommittedMemorySize"),
-		HeapUsedMemorySize:         NewPtvMetric("heap_used_memory_bytes", "Value of heapUsedMemorySize"),
-		NonHeapCommittedMemorySize: NewPtvMetric("non_heap_committed_memory_bytes", "Value of nonHeapCommittedMemorySize"),
-		NonHeapUsedMemorySize:      NewPtvMetric("non_heap_used_memory_bytes", "Value of nonHeapUsedMemorySize"),
+		PTVUp:   NewPtvMetric("up", "1 if the last metrics scrape was successful"),
+		PTVInfo: NewPtvMetric("info", "A gauge with constant value 1 showing PTV info in labels", "service_name", "process_name"),
+
+		MinPoolSize: NewPtvMetric("min_pool_size", "Value of minPoolSize"),
+		MaxPoolSize: NewPtvMetric("max_pool_size", "Value of maxPoolSize"),
+
+		NumSuccess:  NewPtvMetric("num_success", "Value of numSuccess"),
+		NumFailure:  NewPtvMetric("num_failure", "Value of numFailure"),
+		NumRejected: NewPtvMetric("num_rejected", "Value of numRejected"),
+		NumService:  NewPtvMetric("num_service", "Value of numService"),
+
+		CommittedVirtualMemoryBytes: NewPtvMetric("committed_virtual_memory_bytes", "Value of committedVirtualMemorySize in bytes"),
+		HeapCommittedMemoryBytes:    NewPtvMetric("heap_committed_memory_bytes", "Value of heapCommittedMemorySize in bytes"),
+		HeapUsedMemoryBytes:         NewPtvMetric("heap_used_memory_bytes", "Value of heapUsedMemorySize in bytes"),
+		NonHeapCommittedMemoryBytes: NewPtvMetric("non_heap_committed_memory_bytes", "Value of nonHeapCommittedMemorySize in bytes"),
+		NonHeapUsedMemoryBytes:      NewPtvMetric("non_heap_used_memory_bytes", "Value of nonHeapUsedMemorySize in bytes"),
+
+		ProcessCPUTimeSeconds: NewPtvMetric("process_cpu_time_seconds", "Value of processCpuTime in seconds"),
+
+		AvgInnerTimeSeconds:       NewPtvMetric("avg_inner_time_seconds", "Value of avgInnerTime in seconds"),
+		MinInnerTimeSeconds:       NewPtvMetric("min_inner_time_seconds", "Value of minInnerTime in seconds"),
+		MaxInnerTimeSeconds:       NewPtvMetric("max_inner_time_seconds", "Value of maxInnerTime in seconds"),
+		AvgComputationTimeSeconds: NewPtvMetric("avg_computation_time_seconds", "Value of avgComputationTime in seconds"),
+		AvgOuterTimeSeconds:       NewPtvMetric("avg_outer_time_seconds", "Value of avgOuterTime in seconds"),
+		MinOuterTimeSeconds:       NewPtvMetric("min_outer_time_seconds", "Value of minOuterTime in seconds"),
+		MaxOuterTimeSeconds:       NewPtvMetric("max_outer_time_seconds", "Value of maxOuterTime in seconds"),
+
+		TimeQuantile50InnerSeconds: NewPtvMetric("time_quantile_50_inner_seconds", "Value of innerTime in timeQuantiles for q=0.5 in seconds"),
+		TimeQuantile50OuterSeconds: NewPtvMetric("time_quantile_50_outer_seconds", "Value of outerTime in timeQuantiles for q=0.5 in seconds"),
+		TimeQuantile75InnerSeconds: NewPtvMetric("time_quantile_75_inner_seconds", "Value of innerTime in timeQuantiles for q=0.75 in seconds"),
+		TimeQuantile75OuterSeconds: NewPtvMetric("time_quantile_75_outer_seconds", "Value of outerTime in timeQuantiles for q=0.75 in seconds"),
+		TimeQuantile90InnerSeconds: NewPtvMetric("time_quantile_90_inner_seconds", "Value of innerTime in timeQuantiles for q=0.90 in seconds"),
+		TimeQuantile90OuterSeconds: NewPtvMetric("time_quantile_90_outer_seconds", "Value of outerTime in timeQuantiles for q=0.90 in seconds"),
+		TimeQuantile95InnerSeconds: NewPtvMetric("time_quantile_95_inner_seconds", "Value of innerTime in timeQuantiles for q=0.95 in seconds"),
+		TimeQuantile95OuterSeconds: NewPtvMetric("time_quantile_95_outer_seconds", "Value of outerTime in timeQuantiles for q=0.95 in seconds"),
+		TimeQuantile98InnerSeconds: NewPtvMetric("time_quantile_98_inner_seconds", "Value of innerTime in timeQuantiles for q=0.98 in seconds"),
+		TimeQuantile98OuterSeconds: NewPtvMetric("time_quantile_98_outer_seconds", "Value of outerTime in timeQuantiles for q=0.98 in seconds"),
 	}
 }
 
@@ -50,11 +97,31 @@ func (m *PTVMetrics) Describe(ch chan<- *prometheus.Desc) {
 	ch <- m.NumFailure.Desc
 	ch <- m.NumRejected.Desc
 	ch <- m.NumService.Desc
-	ch <- m.CommittedVirtualMemorySize.Desc
-	ch <- m.HeapCommittedMemorySize.Desc
-	ch <- m.HeapUsedMemorySize.Desc
-	ch <- m.NonHeapCommittedMemorySize.Desc
-	ch <- m.NonHeapUsedMemorySize.Desc
+	ch <- m.CommittedVirtualMemoryBytes.Desc
+	ch <- m.HeapCommittedMemoryBytes.Desc
+	ch <- m.HeapUsedMemoryBytes.Desc
+	ch <- m.NonHeapCommittedMemoryBytes.Desc
+	ch <- m.NonHeapUsedMemoryBytes.Desc
+	ch <- m.ProcessCPUTimeSeconds.Desc
+
+	ch <- m.AvgInnerTimeSeconds.Desc
+	ch <- m.MinInnerTimeSeconds.Desc
+	ch <- m.MaxInnerTimeSeconds.Desc
+	ch <- m.AvgComputationTimeSeconds.Desc
+	ch <- m.AvgOuterTimeSeconds.Desc
+	ch <- m.MinOuterTimeSeconds.Desc
+	ch <- m.MaxOuterTimeSeconds.Desc
+
+	ch <- m.TimeQuantile50InnerSeconds.Desc
+	ch <- m.TimeQuantile50OuterSeconds.Desc
+	ch <- m.TimeQuantile75InnerSeconds.Desc
+	ch <- m.TimeQuantile75OuterSeconds.Desc
+	ch <- m.TimeQuantile90InnerSeconds.Desc
+	ch <- m.TimeQuantile90OuterSeconds.Desc
+	ch <- m.TimeQuantile95InnerSeconds.Desc
+	ch <- m.TimeQuantile95OuterSeconds.Desc
+	ch <- m.TimeQuantile98InnerSeconds.Desc
+	ch <- m.TimeQuantile98OuterSeconds.Desc
 }
 
 // SetPtvDown exports metrics indicating that the PTV instance is down
@@ -73,9 +140,43 @@ func (m *PTVMetrics) SetPtvUp(ch chan<- prometheus.Metric, rawMetrics *RawMetric
 	ch <- m.NumRejected.CreateMetric(prometheus.CounterValue, rawMetrics.NumRejected)
 	ch <- m.NumService.CreateMetric(prometheus.CounterValue, rawMetrics.NumService)
 
-	ch <- m.CommittedVirtualMemorySize.CreateMetric(prometheus.GaugeValue, rawMetrics.CommittedVirtualMemorySize)
-	ch <- m.HeapCommittedMemorySize.CreateMetric(prometheus.GaugeValue, rawMetrics.HeapCommittedMemorySize)
-	ch <- m.HeapUsedMemorySize.CreateMetric(prometheus.GaugeValue, rawMetrics.HeapUsedMemorySize)
-	ch <- m.NonHeapCommittedMemorySize.CreateMetric(prometheus.GaugeValue, rawMetrics.NonHeapCommittedMemorySize)
-	ch <- m.NonHeapUsedMemorySize.CreateMetric(prometheus.GaugeValue, rawMetrics.NonHeapUsedMemorySize)
+	ch <- m.CommittedVirtualMemoryBytes.CreateMetric(prometheus.GaugeValue, rawMetrics.CommittedVirtualMemorySize)
+	ch <- m.HeapCommittedMemoryBytes.CreateMetric(prometheus.GaugeValue, rawMetrics.HeapCommittedMemorySize)
+	ch <- m.HeapUsedMemoryBytes.CreateMetric(prometheus.GaugeValue, rawMetrics.HeapUsedMemorySize)
+	ch <- m.NonHeapCommittedMemoryBytes.CreateMetric(prometheus.GaugeValue, rawMetrics.NonHeapCommittedMemorySize)
+
+	ch <- m.ProcessCPUTimeSeconds.CreateMetric(prometheus.CounterValue, cpuTimeToSeconds(rawMetrics.ProcessCPUTime))
+
+	ch <- m.AvgInnerTimeSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.AvgInnerTime))
+	ch <- m.MinInnerTimeSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.MinInnerTime))
+	ch <- m.MaxInnerTimeSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.MaxInnerTime))
+	ch <- m.AvgComputationTimeSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.AvgComputationTime))
+	ch <- m.AvgOuterTimeSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.AvgOuterTime))
+	ch <- m.MinOuterTimeSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.MinOuterTime))
+	ch <- m.MaxOuterTimeSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.MaxOuterTime))
+
+	ch <- m.TimeQuantile50InnerSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.5).InnerTime))
+	ch <- m.TimeQuantile50OuterSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.5).OuterTime))
+	ch <- m.TimeQuantile75InnerSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.75).InnerTime))
+	ch <- m.TimeQuantile75OuterSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.75).OuterTime))
+	ch <- m.TimeQuantile90InnerSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.9).InnerTime))
+	ch <- m.TimeQuantile90OuterSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.9).OuterTime))
+	ch <- m.TimeQuantile95InnerSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.95).InnerTime))
+	ch <- m.TimeQuantile95OuterSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.95).OuterTime))
+	ch <- m.TimeQuantile98InnerSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.98).InnerTime))
+	ch <- m.TimeQuantile98OuterSeconds.CreateMetric(prometheus.GaugeValue, millisToSeconds(rawMetrics.GetQuantile(0.98).OuterTime))
+}
+
+// cpuTimeToSeconds converts PTV processor time (appears to be nanoseconds) to seconds
+func cpuTimeToSeconds(fromPtv float64) float64 {
+	return fromPtv / 1000000000
+}
+
+// millisToSeconds converts non-zero `millis` values to seconds
+func millisToSeconds(millis float64) float64 {
+	if millis > 0 {
+		return millis / 1000.0
+	}
+
+	return 0
 }

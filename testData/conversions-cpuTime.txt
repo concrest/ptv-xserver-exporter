@@ -1,5 +1,6 @@
 27486156250000
 
+// not microseconds - nanoseconds!
 function formatCpuTime(cpuMicro) { = 27486156250000
 		var cpu = cpuMicro / 1000000, = 27486156250000
 			cpu_s = (cpu = Math.floor(cpu / 1000)) % 60,
@@ -29,7 +30,7 @@ cpu_d
 
 
 cpuMicro
-1236773546875000
+1236773546875000 = 14 days 7 hours 32 min 53 seconds
 cpu_s
 53
 cpu_min
@@ -38,3 +39,14 @@ cpu_h
 7
 cpu_d
 14
+
+== 1236773 seconds
+   1236773.546875000 == 1236773546875000 / 1000000000
+
+
+
+
+14 days as seconds: 14 * 24 * 60 * 60 = 1209600
+7 hours as seconds = 7 * 60 * 60 = 25200
+32 min as seconds = 32 * 60 = 1920
++ 53
