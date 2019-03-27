@@ -9,9 +9,8 @@ import (
 
 // PTVMetricsCollector implements the `prometheus.Collector` interface
 type PTVMetricsCollector struct {
-	scraper         *Scraper
-	ptvUpDesc       *prometheus.Desc
-	minPoolSizeDesc *prometheus.Desc
+	scraper *Scraper
+	metrics *PTVMetrics
 }
 
 // NewPTVMetricsCollector creates a new custom Prometheus collector for PTV metrics
@@ -19,9 +18,8 @@ func NewPTVMetricsCollector(s *Scraper) *PTVMetricsCollector {
 	log.Debug("Creating New PTVMetricsCollector")
 
 	return &PTVMetricsCollector{
-		scraper:         s,
-		ptvUpDesc:       prometheus.NewDesc(metricName("up"), "1 if the last metrics scrape was successful", nil, nil),
-		minPoolSizeDesc: prometheus.NewDesc(metricName("min_pool_size"), "Value of minPoolSize", nil, nil),
+		scraper: s,
+		metrics: NewPtvMetrics(),
 	}
 }
 
@@ -29,37 +27,23 @@ func NewPTVMetricsCollector(s *Scraper) *PTVMetricsCollector {
 func (c *PTVMetricsCollector) Describe(ch chan<- *prometheus.Desc) {
 	defer timeTrack(time.Now(), "PTVMetricsCollector.Describe")
 
-	ch <- c.ptvUpDesc
-	ch <- c.minPoolSizeDesc
+	c.metrics.Describe(ch)
 }
 
 // Collect implements the `prometheus.Collector` interface
 func (c *PTVMetricsCollector) Collect(ch chan<- prometheus.Metric) {
 	defer timeTrack(time.Now(), "PTVMetricsCollector.Collect")
 
+	// External call to PTV here:
 	rawMetrics, err := c.scraper.Scrape()
 	if err != nil {
 		log.WithFields(log.Fields{
 			"error": err,
 		}).Error("Scrape error")
 
-		ch <- prometheus.MustNewConstMetric(
-			c.ptvUpDesc,
-			prometheus.GaugeValue,
-			0,
-		)
+		c.metrics.SetPtvDown(ch)
 		return
 	}
 
-	// Scrape successful - map metrics to prometheus ones
-	ch <- prometheus.MustNewConstMetric(
-		c.ptvUpDesc,
-		prometheus.GaugeValue,
-		1,
-	)
-	ch <- prometheus.MustNewConstMetric(
-		c.minPoolSizeDesc,
-		prometheus.GaugeValue,
-		rawMetrics.MinPoolSize,
-	)
+	c.metrics.SetPtvUp(ch, rawMetrics)
 }
