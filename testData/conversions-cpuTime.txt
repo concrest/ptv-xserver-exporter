@@ -50,3 +50,6 @@ cpu_d
 7 hours as seconds = 7 * 60 * 60 = 25200
 32 min as seconds = 32 * 60 = 1920
 + 53
+
+instance.uptime in PTV JSON is in milliseconds, not nanoseconds. instance.processCPUTime is still in nanoseconds. Memory is all in bytes, but the UI
+ uses the european 1,000 separator (.) rather than , so "901.384 K" == 901,384 K    i.e. > 900MB
