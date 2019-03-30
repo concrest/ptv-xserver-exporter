@@ -1,0 +1,176 @@
+{
+ "serviceName":"PTV xLocate Server",
+ "minPoolSize":8,
+ "maxPoolSize":8,
+ "numSuccess":44453189,
+ "numFailure":14,
+ "numRejected":70,
+ "numService":0,
+ "avgInnerTime":5,
+ "minInnerTime":-22,
+ "maxInnerTime":6068,
+ "avgComputationTime":5,
+ "avgOuterTime":7,
+ "minOuterTime":0,
+ "maxOuterTime":15901,
+ "processName":"11708@MYMAPSVR",
+ "committedVirtualMemorySize":911511552,
+ "processCpuTime":38486312500000,
+ "heapCommittedMemorySize":534773760,
+ "heapUsedMemorySize":175842456,
+ "nonHeapCommittedMemorySize":145014784,
+ "nonHeapUsedMemorySize":139725352,
+ "timeQuantiles": [
+  { "q":0.5, "outerTime":5, "innerTime":3 },
+  { "q":0.75, "outerTime":5, "innerTime":3 },
+  { "q":0.9, "outerTime":6, "innerTime":4 },
+  { "q":0.95, "outerTime":10, "innerTime":5 },
+  { "q":0.98, "outerTime":45, "innerTime":31 }
+ ],
+ "instances":[
+  {
+   "instanceSuffix":"m0001",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":8203268577,
+   "inUse":false,
+   "useCounter":5588690,
+   "moduleStatus":"RUNNING",
+   "processName":"15264@MYMAPSVR",
+   "committedVirtualMemorySize":491843584,
+   "processCpuTime":34696171875000,
+   "heapCommittedMemorySize":32505856,
+   "heapUsedMemorySize":13424592,
+   "nonHeapCommittedMemorySize":49217536,
+   "nonHeapUsedMemorySize":47546152
+  }
+, 
+  {
+   "instanceSuffix":"m0002",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":8203265746,
+   "inUse":false,
+   "useCounter":5541494,
+   "moduleStatus":"RUNNING",
+   "processName":"14104@MYMAPSVR",
+   "committedVirtualMemorySize":474992640,
+   "processCpuTime":29487265625000,
+   "heapCommittedMemorySize":34603008,
+   "heapUsedMemorySize":8903632,
+   "nonHeapCommittedMemorySize":48693248,
+   "nonHeapUsedMemorySize":46934544
+  }
+, 
+  {
+   "instanceSuffix":"m0003",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":8203264905,
+   "inUse":false,
+   "useCounter":5556009,
+   "moduleStatus":"RUNNING",
+   "processName":"15944@MYMAPSVR",
+   "committedVirtualMemorySize":489746432,
+   "processCpuTime":29578671875000,
+   "heapCommittedMemorySize":32505856,
+   "heapUsedMemorySize":6403208,
+   "nonHeapCommittedMemorySize":54525952,
+   "nonHeapUsedMemorySize":53257032
+  }
+, 
+  {
+   "instanceSuffix":"m0004",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":8203265350,
+   "inUse":false,
+   "useCounter":5555309,
+   "moduleStatus":"RUNNING",
+   "processName":"16076@MYMAPSVR",
+   "committedVirtualMemorySize":485883904,
+   "processCpuTime":29334250000000,
+   "heapCommittedMemorySize":32505856,
+   "heapUsedMemorySize":7428952,
+   "nonHeapCommittedMemorySize":49086464,
+   "nonHeapUsedMemorySize":47324888
+  }
+, 
+  {
+   "instanceSuffix":"m0005",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":8203266083,
+   "inUse":false,
+   "useCounter":5557462,
+   "moduleStatus":"RUNNING",
+   "processName":"4128@MYMAPSVR",
+   "committedVirtualMemorySize":512692224,
+   "processCpuTime":29491312500000,
+   "heapCommittedMemorySize":33030144,
+   "heapUsedMemorySize":14931592,
+   "nonHeapCommittedMemorySize":48955392,
+   "nonHeapUsedMemorySize":47255304
+  }
+, 
+  {
+   "instanceSuffix":"m0006",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":8203264793,
+   "inUse":false,
+   "useCounter":5553664,
+   "moduleStatus":"RUNNING",
+   "processName":"14524@MYMAPSVR",
+   "committedVirtualMemorySize":431374336,
+   "processCpuTime":29635296875000,
+   "heapCommittedMemorySize":33030144,
+   "heapUsedMemorySize":14621448,
+   "nonHeapCommittedMemorySize":54657024,
+   "nonHeapUsedMemorySize":53384088
+  }
+, 
+  {
+   "instanceSuffix":"m0007",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":8203265462,
+   "inUse":false,
+   "useCounter":5566610,
+   "moduleStatus":"RUNNING",
+   "processName":"13992@MYMAPSVR",
+   "committedVirtualMemorySize":480436224,
+   "processCpuTime":29634312500000,
+   "heapCommittedMemorySize":32505856,
+   "heapUsedMemorySize":13613600,
+   "nonHeapCommittedMemorySize":54362112,
+   "nonHeapUsedMemorySize":52983744
+  }
+, 
+  {
+   "instanceSuffix":"m0008",
+   "restartCounter":0,
+   "userRestartCounter":0,
+   "uptime":8203265617,
+   "inUse":false,
+   "useCounter":5533951,
+   "moduleStatus":"RUNNING",
+   "processName":"1868@MYMAPSVR",
+   "committedVirtualMemorySize":485195776,
+   "processCpuTime":29485578125000,
+   "heapCommittedMemorySize":33030144,
+   "heapUsedMemorySize":9763456,
+   "nonHeapCommittedMemorySize":48627712,
+   "nonHeapUsedMemorySize":46945152
+  }
+  
+ ],
+ "backendTimeout":60000,
+ "startupTimeout":300000,
+ "jobBackendTimeout":-1,
+ "requests":[
+ ],
+ "watches":[
+ ]
+
+}
