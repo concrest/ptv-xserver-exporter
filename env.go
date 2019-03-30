@@ -19,7 +19,7 @@ type Environment struct {
 	// LogLevel is the logging level to output to console
 	// Supported values: Debug, Info, Warn, Error.  Default is Info
 	LogLevel string
-	// Port is the HTTP port to start the server on.  Default is 8080
+	// Port is the HTTP port to start the server on.  Default is 9562
 	Port string
 	// MetricsAPIURL must be set to point to a PTV xServer metrics endpoint
 	MetricsAPIURL string
@@ -42,7 +42,7 @@ func NewEnvironment(version *VersionInfo) *Environment {
 	env := &Environment{
 		VersionInfo:        version,
 		LogLevel:           "Info",
-		Port:               "8080", // TODO: Claim a prometheus exporter port
+		Port:               "9562", // Claimed on https://github.com/prometheus/prometheus/wiki/Default-port-allocations
 		IncDebugHandlers:   false,
 		HTTPLoggingEnabled: false,
 	}

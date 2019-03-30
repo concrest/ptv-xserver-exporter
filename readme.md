@@ -38,7 +38,7 @@ Set environment variable *METRICS_API_URL* to one of these values.  The exporter
 
 ### Prometheus Setup
 
-The exporter runs on port 8080 by default with a standard /metrics endpoint.  Add this scrape target to your Prometheus setup either directly to the prometheus.yml file, or by using your existing service discovery mechanisms.
+The exporter runs on port 9562 by default with a standard /metrics endpoint.  Add this scrape target to your Prometheus setup either directly to the prometheus.yml file, or by using your existing service discovery mechanisms.
 
 See [Prometheus Configuration Guide](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) for more information.
 
@@ -48,7 +48,7 @@ Check env.go for full details.  Summary:
 
   * METRICS_API_URL - Mandatory - PTV xServer metrics API (1 API only). Example: http://servername:50010/xmap/pages/moduleCommand.jsp?status=json
   * LOG_LEVEL - Supported values: Debug, Info, Warn, Error.  Default is Info
-  * PORT - Default is 8080 (this default will change closer to the Final version)
+  * PORT - Default is 9562
   * INCLUDE_DEBUG_HANDLERS - 0 or 1. Whether to add pprof HTTP endpoints. Default is 0
   * HTTP_LOGGING_ENABLED - 0 or 1. Whether to log HTTP calls at Debug level. Default is 0
 
