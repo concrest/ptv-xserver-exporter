@@ -1,0 +1,3 @@
+$ docker build -t ptv-xserver-exporter --build-arg "BUILD_BUILDNUMBER=0.2-alpha" --build-arg "BUILD_SOURCEVERSION=CommitId" --build-arg "BUILD_DATE=$(date)" .
+
+$ docker run --rm -d -p 9562:9562 -e "METRICS_API_URL=http://localhost:5000/example-xlocate.json" ptv-xserver-exporter
