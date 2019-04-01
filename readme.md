@@ -32,7 +32,7 @@ This exporter calls this endpoint, parses the JSON, and exposes the same data as
 Examples:
 
   * xMap server on hosted on a server call MyMapServer and port 50010: http://MyMapServer:50010/xmap/pages/moduleCommand.jsp?status=json
-  * xRoute server on hosted on a server call MyRouteServer and port 50030: http://MyRouteServer:50030/xmap/pages/moduleCommand.jsp?status=json
+  * xRoute server on hosted on a server call MyRouteServer and port 50030: http://MyRouteServer:50030/xroute/pages/moduleCommand.jsp?status=json
 
 Set environment variable *METRICS_API_URL* to one of these values.  The exporter will call this URL each time your Prometheus server scrapes the /metrics endpoint.
 
