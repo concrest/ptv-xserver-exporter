@@ -1,7 +1,7 @@
 #first stage - builder
 FROM golang:1.12.1-stretch as builder
 
-ARG BUILD_BUILDNUMBER=0.1-alpha
+ARG BUILD_BUILDNUMBER=0.2-alpha
 ARG BUILD_SOURCEVERSION=local-dev-build
 ARG BUILD_DATE=unknown-date
 
@@ -18,4 +18,5 @@ RUN go build -ldflags "-X 'main.version=$BUILD_BUILDNUMBER' -X 'main.buildDate=$
 FROM alpine:latest
 WORKDIR /app/
 COPY --from=builder /build .
+EXPOSE 9562
 CMD ["/app/ptv-xserver-exporter"]

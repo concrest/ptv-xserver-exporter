@@ -12,4 +12,4 @@ Run a container, exposing port 5000:
 $ docker run --rm -d -p 5000:80 fake-ptv-server
 ```
 
-Run with environment variable METRICS_API_URL=http://localhost:5000/the-json-filename-here (see start-debug.bat for example)
+Then run the exporter with environment variable METRICS_API_URL=http://localhost:5000/the-json-filename-here (see start-debug.bat for example)
