@@ -32,7 +32,7 @@ This exporter calls this endpoint, parses the JSON, and exposes the same data as
 Examples:
 
   * xMap server on hosted on a server call MyMapServer and port 50010: http://MyMapServer:50010/xmap/pages/moduleCommand.jsp?status=json
-  * xRoute server on hosted on a server call MyRouteServer and port 50030: http://MyRouteServer:50030/xmap/pages/moduleCommand.jsp?status=json
+  * xRoute server on hosted on a server call MyRouteServer and port 50030: http://MyRouteServer:50030/xroute/pages/moduleCommand.jsp?status=json
 
 Set environment variable *METRICS_API_URL* to one of these values.  The exporter will call this URL each time your Prometheus server scrapes the /metrics endpoint.
 
@@ -56,7 +56,20 @@ Check env.go for full details.  Summary:
 
 Using Go version: go1.12.1 windows/amd64.  Currently developed only on Windows 10.
 
+*Uses Go Modules - you will need environment variable GO111MODULE=on*. The convenience scripts below include this already. See [Go Modules](https://github.com/golang/go/wiki/Modules) for more details
+
   * build-debug.bat - Builds a local version with hard coded version numbers
   * start-debug.bat - Executes with full debug logging. Edit this file to set your METRICS_API_URL address
+  * debug.bat - Calls build-debug.bat then start-debug.bat
 
-Linux and Docker support will be added later.
+### Docker
+
+The supplied `Dockerfile` builds an Alpine-based image, passing in build arguments so the build version can be published with the metrics.  Example `docker build` and `docker run` commands are below:
+
+```console
+docker build -t ptv-xserver-exporter --build-arg "BUILD_BUILDNUMBER=0.2-alpha" --build-arg "BUILD_SOURCEVERSION=CommitId" --build-arg "BUILD_DATE=$(date)" .
+
+docker run --rm -d -p 9562:9562 -e "METRICS_API_URL=http://servername:50010/xmap/pages/moduleCommand.jsp?status=json" ptv-xserver-exporter
+```
+
+A pre-built image will be pushed to Docker Hub eventually.
