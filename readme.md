@@ -1,7 +1,7 @@
 # PTV xServer Prometheus Exporter
 
-  * [![Build status](https://iandykes.visualstudio.com/PTV xServer Exporter/_apis/build/status/PTV%20xServer%20Exporter%20Docker%20Hub%20Master)](https://iandykes.visualstudio.com/PTV xServer Exporter/_build/latest?definitionId=2)
-  * [PTV xServer Exporter on Docker Hub](https://hub.docker.com/r/concrest/ptv-xserver-exporter)
+  * Build Status: ![Build status](https://iandykes.visualstudio.com/PTV%20xServer%20Exporter/_apis/build/status/PTV%20xServer%20Exporter%20Docker%20Hub%20Master)
+  * Docker Image: [PTV xServer Exporter on Docker Hub](https://hub.docker.com/r/concrest/ptv-xserver-exporter)
 
 Prometheus Exporter for PTV's xServer suite of GIS services. Converts metrics exposed as JSON by each service to Prometheus format.  Intent is to support the following services:
 
@@ -27,7 +27,7 @@ A pre-built image is available on [Docker Hub](https://hub.docker.com/r/concrest
 docker pull concrest/ptv-xserver-exporter:latest
 ```
 
-You must provide at least `METRICS_API_URL` environment variable to point the exporter at a specific xServer instance.  The following command runs the latest exporter version, pointing to a servername, and exposes the metrics port so a Prometheus instance outside of Docker can scrape the exporter:
+You must provide at least the `METRICS_API_URL` environment variable to point the exporter at a specific xServer instance.  The following command runs the latest exporter version, pointing to a servername, and exposes the metrics port so a Prometheus instance outside of Docker can scrape the exporter:
 
 ```console
 docker run --rm -d -p 9562:9562 -e "METRICS_API_URL=http://servername:50010/xmap/pages/moduleCommand.jsp?status=json" concrest/ptv-xserver-exporter:latest
@@ -59,7 +59,7 @@ See [Prometheus Configuration Guide](https://prometheus.io/docs/prometheus/lates
 
 ### Exporter Environment Variables
 
-Check env.go for full details.  Summary:
+Check `env.go` for full details.  Summary:
 
   * METRICS_API_URL - Mandatory - PTV xServer metrics API (1 API only). Example: http://servername:50010/xmap/pages/moduleCommand.jsp?status=json
   * LOG_LEVEL - Supported values: Debug, Info, Warn, Error.  Default is Info
@@ -79,7 +79,7 @@ Using Go version: go1.12.1 windows/amd64.  Currently developed only on Windows 1
 
 ### Local Docker build
 
-You should use the latest image available on [Docker Hub](https://hub.docker.com/r/concrest/ptv-xserver-exporter) for monitoring your own PTV services, but if you want to build from source ni Docker, then see below:
+You should use the latest image available on [Docker Hub](https://hub.docker.com/r/concrest/ptv-xserver-exporter) for monitoring your own PTV services, but if you want to build from source in Docker, then see below:
 
 The supplied `Dockerfile` builds an Alpine-based image, passing in build arguments so the build version can be published with the metrics.  Example `docker build` and `docker run` commands are below:
 
