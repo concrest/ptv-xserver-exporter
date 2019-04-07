@@ -1,5 +1,8 @@
 # PTV xServer Prometheus Exporter
 
+  * Build Status: ![Build status](https://iandykes.visualstudio.com/PTV%20xServer%20Exporter/_apis/build/status/PTV%20xServer%20Exporter%20Docker%20Hub%20Master)
+  * Docker Image: [PTV xServer Exporter on Docker Hub](https://hub.docker.com/r/concrest/ptv-xserver-exporter)
+
 Prometheus Exporter for PTV's xServer suite of GIS services. Converts metrics exposed as JSON by each service to Prometheus format.  Intent is to support the following services:
 
   * xMap
@@ -9,13 +12,26 @@ Prometheus Exporter for PTV's xServer suite of GIS services. Converts metrics ex
 
 Other PTV xServer products may work if the JSON format is the same.
 
-Project Status: *Alpha* - Minimal functionality, minimal build and release process
+Project Status: *Beta* - Feature complete, build and release process complete
 
 ## Planned Roadmap
 
-  * Alpha - Minimal functionality, minimal build and release process
   * Beta - Feature complete, build and release process complete
   * Final - Major version 1, ready for production
+
+## Get from Docker Hub
+
+A pre-built image is available on [Docker Hub](https://hub.docker.com/r/concrest/ptv-xserver-exporter)
+
+```console
+docker pull concrest/ptv-xserver-exporter:latest
+```
+
+You must provide at least the `METRICS_API_URL` environment variable to point the exporter at a specific xServer instance.  The following command runs the latest exporter version, pointing to a servername, and exposes the metrics port so a Prometheus instance outside of Docker can scrape the exporter:
+
+```console
+docker run --rm -d -p 9562:9562 -e "METRICS_API_URL=http://servername:50010/xmap/pages/moduleCommand.jsp?status=json" concrest/ptv-xserver-exporter:latest
+```
 
 ## Configuration
 
@@ -23,9 +39,8 @@ The only required configuration setting is the PTV xServer metrics API you want 
 
 See [Administrator Guide - Surveillance and Monitoring](https://xserver.ptvgroup.com/fileadmin/files/PTV-COMPONENTS/DeveloperZone/Documents/xServer_public/manual/Default.htm#Administrators_Guide/DSC_SurveillanceAndMonitoring.htm%3FTocPath%3DAdministrator's%2520Guide%7CAdministration%7C_____3) for details on PTV monitoring.  This exporter works with the API described in the *Use the status report* section:
 
-```
-For automated monitoring there are status reports available under //<servername>:<port>/<service>/pages/moduleCommand.jsp?status=json which can be automatically retrieved and parsed.
-```
+
+> For automated monitoring there are status reports available under //servername:port/service/pages/moduleCommand.jsp?status=json which can be automatically retrieved and parsed.
 
 This exporter calls this endpoint, parses the JSON, and exposes the same data as Prometheus data types each time Prometheus scrapes the /metrics endpoint.
 
@@ -42,9 +57,9 @@ The exporter runs on port 9562 by default with a standard /metrics endpoint.  Ad
 
 See [Prometheus Configuration Guide](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) for more information.
 
-### Environment Variables
+### Exporter Environment Variables
 
-Check env.go for full details.  Summary:
+Check `env.go` for full details.  Summary:
 
   * METRICS_API_URL - Mandatory - PTV xServer metrics API (1 API only). Example: http://servername:50010/xmap/pages/moduleCommand.jsp?status=json
   * LOG_LEVEL - Supported values: Debug, Info, Warn, Error.  Default is Info
@@ -62,7 +77,9 @@ Using Go version: go1.12.1 windows/amd64.  Currently developed only on Windows 1
   * start-debug.bat - Executes with full debug logging. Edit this file to set your METRICS_API_URL address
   * debug.bat - Calls build-debug.bat then start-debug.bat
 
-### Docker
+### Local Docker build
+
+You should use the latest image available on [Docker Hub](https://hub.docker.com/r/concrest/ptv-xserver-exporter) for monitoring your own PTV services, but if you want to build from source in Docker, then see below:
 
 The supplied `Dockerfile` builds an Alpine-based image, passing in build arguments so the build version can be published with the metrics.  Example `docker build` and `docker run` commands are below:
 
@@ -71,5 +88,3 @@ docker build -t ptv-xserver-exporter --build-arg "BUILD_BUILDNUMBER=0.2-alpha" -
 
 docker run --rm -d -p 9562:9562 -e "METRICS_API_URL=http://servername:50010/xmap/pages/moduleCommand.jsp?status=json" ptv-xserver-exporter
 ```
-
-A pre-built image will be pushed to Docker Hub eventually.

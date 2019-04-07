@@ -1,7 +1,7 @@
 #first stage - builder
 FROM golang:1.12.1-stretch as builder
 
-ARG BUILD_BUILDNUMBER=0.2-alpha
+ARG BUILD_BUILDNUMBER=0.0
 ARG BUILD_SOURCEVERSION=local-dev-build
 ARG BUILD_DATE=unknown-date
 
